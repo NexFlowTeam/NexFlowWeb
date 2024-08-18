@@ -5,6 +5,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
   document.getElementById("wf-form-Contact-3-Form").addEventListener("submit", function (event) {
     event.preventDefault();
+       // Ocultar mensajes antes de enviar
+       document.querySelector(".success-message").style.display = "none";
+       document.querySelector(".error-message").style.display = "none";
 
     // Obtén los valores de los campos del formulario
     const name = document.getElementById("Contact-3-Name-2").value.trim();
@@ -24,15 +27,13 @@ document.addEventListener("DOMContentLoaded", function () {
       message: message,
     };
 
-    emailjs.send("service_ghbeh6k", "template_aulod9m", templateParams).then(
-      function (response) {
-        console.log("SUCCESS!", response.status, response.text);
-        alert("Mensaje enviado con éxito!");
-      },
-      function (error) {
-        console.log("FAILED...", error);
-        alert("Hubo un problema al enviar el mensaje. Inténtalo de nuevo.");
-      }
-    );
-  });
+    emailjs.send("service_ghbeh6k", "template_aulod9m", templateParams)
+    .then(function (response) {
+      // Mostrar mensaje de éxito
+      document.querySelector(".success-message").style.display = "block";
+    }, function (error) {
+      // Mostrar mensaje de error
+      document.querySelector(".error-message").style.display = "block";
+    });
+});
 });
